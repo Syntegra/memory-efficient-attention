@@ -147,7 +147,7 @@ def efficient_dot_product_attention(query, key, value,
             mask_chunk = dynamic_slice(mask, tuple([0] * (mask.ndim - 3)) + (0, chunk_idx, 0),
                                        tuple(mask.shape[:-3]) + (mask.shape[-3], min(query_chunk_size, num_q), mask.shape[-1]))
         else:
-            print(mask_chunk, mask.shape, num_q) ### TEMP
+            print(mask.shape, num_q) ### TEMP
             error_str = f'mask.shape[-2] == {mask.shape[-2]} must broadcast with query.shape[-3] == {num_q}'
             raise TypeError(error_str)
 
@@ -159,7 +159,7 @@ def efficient_dot_product_attention(query, key, value,
             bias_chunk = dynamic_slice(bias, tuple([0] * (bias.ndim - 3)) + (0, chunk_idx, 0),
                                        tuple(bias.shape[:-3]) + (bias.shape[-3], min(query_chunk_size, num_q), bias.shape[-1]))
         else:
-            print(bias_chunk, bias.shape, num_q)   ### TEMP
+            print(bias.shape, num_q)   ### TEMP
             error_str = f'bias.shape[-2] == {bias.shape[-2]} must broadcast with query.shape[-3] == {num_q}'
             raise TypeError(error_str)
         return (chunk_idx + query_chunk_size,
