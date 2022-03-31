@@ -58,7 +58,7 @@ def _query_chunk_attention(query_idx, query, key, value,
 
         if mask is None:
             mask_chunk = None
-        elif bias.shape[-1] == 1:
+        elif mask.shape[-1] == 1:
             mask_chunk = mask
         elif mask.shape[-1] == num_kv:
             mask_chunk = jax.lax.dynamic_slice(
